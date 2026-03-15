@@ -1,0 +1,26 @@
+각각의 나무들의 길이가 주어지는데 이 나무를 h만큰 각각 자르고 남은 값을 적어도 m만큼 가져가야 하는데 이 h를 구하는 문제이다.
+문제에서 적어도 m의 길이여야 한다고 했으니 이 문제는 m의 길이가 작아야 하고 m의 길이가 작으려면 반대로 h의 길이가 커야한다.(나무에서 h씩 빼서 남은걸 더한게 m이니깐)
+특정 값이나 인덱스를 찾는게 아니라 범위를 찾느거기 때문에 파라메트릭 서치이다. 
+def parametric_search():
+    start, end = 1, max(data)
+    ans = 0
+    while start <= end:
+        mid = (start + end) // 2
+        if cutting(mid) >= m:
+            ans = mid
+            start = mid + 1
+        else:
+            end = mid - 1
+    return ans
+
+앞서 h의 길이가 커야 한다고 했으니깐 start = mid + 1을 해줘서 자를 수 있는 범위 내에서 최대한 큰 값을 탐색하였다.
+아 그리고 나무 자르는 함수는
+def cutting(x):
+    result = 0
+    for i in data:
+        cut = i-x
+        if cut >= 0:
+            result += cut
+    return result
+간단하게 데이터 순회하면서 빼줌. 시간 초과 날 줄 알았는데 안났음. ㄱㅇㄷ
+난이도 : A(B향 첨가)
