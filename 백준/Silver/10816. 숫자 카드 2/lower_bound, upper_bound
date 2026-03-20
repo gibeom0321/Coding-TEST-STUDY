@@ -1,0 +1,38 @@
+1. lower_bound
+
+def lower_bound(target):
+	start = 0
+	end = len(array)
+	while start < end:
+		mid = (start + end) // 2
+		if array[mid] >= target: 
+			end = mid
+		else:
+			start = mid + 1
+	return start
+
+2. upper_bound
+
+def upper_bound(target):
+	start = 0
+	end = len(array)
+	while start < end:
+		mid = (start + end) // 2
+		if array[mid] > target: 
+			end = mid
+		else:
+			start = mid + 1
+	return start
+
+--------------------------------------------------------------------------------------------------------------------------
+## lower_bound
+
+```
+array[mid] >= target → 왼쪽 (end = mid)
+```
+
+## upper_bound
+
+```
+array[mid] > target → 왼쪽 (end = mid)
+```
