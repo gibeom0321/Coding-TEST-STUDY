@@ -5,8 +5,20 @@ n, m = map(int, input().split())
 a = list(map(int, input().split()))
 b = list(map(int, input().split()))
 
-com_list = a+b
-com_list.sort()
-com_list = map(str, com_list)
+i = 0
+j = 0
 
-print(' '.join(com_list))
+while i <= n-1 and j <= m-1:
+    if a[i] < b[j]:
+        print(a[i], end = ' ')
+        i += 1
+    else:
+        print(b[j], end= ' ')
+        j += 1
+    
+while i < n:
+    print(a[i], end = ' ')
+    i += 1
+while j < m:
+    print(b[j], end = ' ')
+    j += 1
