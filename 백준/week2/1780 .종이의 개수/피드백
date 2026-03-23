@@ -1,0 +1,45 @@
+분할 정복을 공부하기에 굉장히 좋은 문제인것 같다.
+nxn 크기의 종이에 -1, 0, 1의 숫자들이 적혀있는데 정확하게 9등분 해서 각 부분이 같은 숫자이면 숫자 카운트 +1 하고 그렇지 않으면 다시 분할하는 걸 반복하는 문제이다.
+
+유독 그래프가 들어가면 머리가 아파지는 느낌이 든다. 이 문제도 정확하게 9등분을 어떻게 할 것이며, 체크는 어떻게 하고, 함수의 인수를 어떤걸로 받아야 할지 고민을 많이 했다.
+우선 분할 devide함수는 x좌표, y좌표, 길이 l을 매개변수로 받는다. 그러면 체크 함수를 통해 같은 값을 가지고 있는지 확인한다.
+
+def check(x, y, l):
+    global check_0
+    global check_1
+    global check_minus1
+    first = graph[x][y]
+    
+    for i in range(l):
+        for j in range(l):
+            if first != graph[x+i][y+j]:
+                return True
+    if first == 1:
+        check_1 += 1
+    elif first == 0:
+        check_0 += 1
+    else:
+        check_minus1 += 1
+    return False
+
+      
+/* x좌표, y좌표, 변의 길이를 매개변수로 입력받고 탐색하려는 그래프의 첫 값을 first변수에 넣은뒤 탐색하면서 first변수와 다른 값이 나오면 True값을 리턴하고 다 같은 값이 나오면 어떤 숫자로 저장되어있는지에 
+따라 값을 저장한다.
+*/
+def devide(x, y, l):
+    if check(x, y, l):
+        l //= 3
+        for i in range(3):
+            for j in range(3):
+                devide(x+i*l, y+j*l, l)
+    else:
+        return
+/*devide함수는 체크 함수를 통해 만약 다른 값이 있다면 9등분을 어떻게 해야하는지 고민했는데 나누는 방법은 x + i(0,1,2) * l(3등분한 길이) 이렇게 해서 devide에 인자로 넣었다.
+
+에러 1. 재귀 깊이가 넘어버려서 에러가 뜸.
+파이썬에서는 재귀를 1000깊이 까지 제공하는걸로 알고 있어서 넉넉잡아 100000으로 넣었는데 또 재귀 깊이 에러가 떴다. 그럼 재귀 제한의 문제가 아니란 의미 이기 때문에 보니깐 탈출 요소를 안만들어 놓았ㄷ.ㅏ
+check함수 리턴값이 false(값이 다 같을때)일때 devide함수도 return해주는 걸로 수정해서 정답.
+
+난이도: A(스스로 품)
+*/
+    
